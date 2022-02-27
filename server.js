@@ -6,7 +6,7 @@ const app = express();
 const port = 5500;
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI-KEY,
+  apiKey: process.env.OPENAI_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
