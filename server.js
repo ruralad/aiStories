@@ -3,7 +3,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const fs = require("fs");
 const { response } = require("express");
 const app = express();
-const port = process.enc.PORT;
+const port = process.env.PORT;
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_KEY,
