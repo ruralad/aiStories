@@ -6,11 +6,12 @@ const app = express();
 const port = 5500;
 
 const configuration = new Configuration({
-  apiKey: "",
+  apiKey: process.env.OPENAI-KEY,
 });
 const openai = new OpenAIApi(configuration);
 
 app.get("/", async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5501');
       const response = await openai.createCompletion("text-davinci-001", {
         prompt: "tell me a story that's happy and not too cliche",
         temperature: 0.7,
@@ -23,6 +24,7 @@ app.get("/", async (req, res) => {
    let file = JSON.parse(obj);
    file.stories.push(response.data.choices[0].text)
    fs.writeFileSync("./data.json",JSON.stringify(file))
+   res.send(response.data.choices[0].text)
 });
 
 app.listen(port, () => {
