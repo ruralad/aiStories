@@ -12,7 +12,6 @@ const {
 } = require("firebase-admin/firestore");
 
 const app = express();
-const port = process.env.PORT || 5000;
 
 const serviceAccount = require("./key.json");
 initializeApp({
@@ -24,7 +23,9 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_KEY,
 });
 const openai = new OpenAIApi(configuration);
-
+app.get("/", (req, res) => {
+  res.send("hi");
+});
 app.post("/create-new-story", async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5501");
   const response = await openai.createCompletion("text-davinci-001", {
@@ -58,6 +59,6 @@ app.get("/update-page-view", async (req, res) => {
     });
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+app.listen(process.env.PORT || 5000, () => {
+  console.log("server up n running");
 });
