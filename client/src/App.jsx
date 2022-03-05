@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useLocalStorage from "use-local-storage";
+import {useLocalStorage} from "use-local-storage";
 import "./styles/App.css";
 
 import book from "./assets/book.png";
