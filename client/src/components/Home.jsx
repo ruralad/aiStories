@@ -59,7 +59,7 @@ function InfoCard(props) {
       </p>
       <h2>how does it work</h2>
       <p>
-        in a nutshell, new stories are made midnight every day in a nodejs
+        in a nutshell, new stories are made every midnight in a nodejs
         server using openai api, and the results are stored in firebase
         database. code is{" "}
         <a
