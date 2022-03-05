@@ -54,7 +54,7 @@ function InfoCard(props) {
           wikipedia
         </a>{" "}
         : 'a autoregressive language model that uses deep learning to produce
-        human-like text'). aistories contains short stories writted by gpt-3,
+        human-like text'). aistories contains short stories written by gpt-3,
         updated daily.
       </p>
       <h2>how does it work</h2>
