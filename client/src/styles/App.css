@@ -12,7 +12,7 @@
 }
 .topbar{
   position: absolute;
-  top: 3%;
+  top: 2%;
   width: 95%;
   display: flex;
   justify-content: space-between;
