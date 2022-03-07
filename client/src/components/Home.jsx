@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import lottie from "lottie-web/build/player/lottie_light";
+import bookAnimation from "../assets/bookOpening.json"
+import libraryAnimation from "../assets/library.json"
+
 import book from "../assets/book.png";
 import books from "../assets/books.png";
 
@@ -14,15 +18,26 @@ export default function Home(props) {
       setPreviousStories(false);
     }, 2000);
   };
+  useEffect(()=>{
+    lottie.loadAnimation({
+      container : document.querySelector("#animation"),
+      animationData : bookAnimation,
+    })
+    lottie.loadAnimation({
+      container : document.querySelector("#animation2"),
+      animationData : libraryAnimation,
+    })
+  },[])
   return (
     <>
       <div className="boxes">
         <div className="box" onClick={() => navigate("/today")}>
-          <img src={book} alt="todaysStory" />
-          <p>todays story</p>
+        <div id="animation" className="animationStyle"></div>
+          <p>today's story</p>
         </div>
         <div className="box" onClick={switchPreviousStories}>
-          <img src={books} alt="allStories" />
+          {/* <img src={books} alt="allStories" /> */}
+          <div id="animation2" className="animationStyle"></div>
           <p>previous stories</p>
         </div>
       </div>

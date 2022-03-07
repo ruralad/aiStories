@@ -17,13 +17,15 @@ export default function TopBar(props) {
       {theme === "dark" && (
         <img src={sun} onClick={switchTheme} alt="switchtolight" />
       )}
-      <img
-        src={theme === "light" ? infodark : infolight}
-        onClick={() => {
-          setInfo(true);
-        }}
-        alt="info"
-      />
+      {setInfo && (
+        <img
+          src={theme === "light" ? infodark : infolight}
+          onClick={() => {
+            setInfo(true);
+          }}
+          alt="info"
+        />
+      )}
     </div>
   );
 }

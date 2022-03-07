@@ -1,0 +1,30 @@
+.app {
+  color: var(--text-primary);
+  background-color: var(--background);
+  width: 100%;
+  min-height: 100vh;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  -webkit-tap-highlight-color: transparent;
+}
+.storyContainer{
+  text-align: left;
+  padding: 20% 10% 10% 10%;
+}
+
+.story {
+  max-width: 400px;
+}
+
+.goBack{
+  text-decoration: underline;
+  cursor: pointer;
+  font-style: italic;
+}
+
+.loadAnimation{
+  width: 200px;
+}
