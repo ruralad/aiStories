@@ -69,13 +69,13 @@ function InfoCard(props) {
           wikipedia
         </a>{" "}
         : 'a autoregressive language model that uses deep learning to produce
-        human-like text'). aistories contains short stories writted by gpt-3,
+        human-like text'). aistories contains short stories written by gpt-3,
         updated daily.
       </p>
       <h2>how does it work</h2>
       <p>
-        in a nutshell, new stories are made midnight every day in a nodejs
-        server using openai api, and the results are stores in firebase
+        in a nutshell, new stories are made every midnight in a nodejs
+        server using openai api, and the results are stored in firebase
         database. code is{" "}
         <a
           href="https://github.com/ruralad/openai-story-project"
