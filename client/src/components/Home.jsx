@@ -1,41 +1,61 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import lottie from "lottie-web/build/player/lottie_light";
-import bookAnimation from "../assets/bookOpening.json"
-import libraryAnimation from "../assets/library.json"
+import bookAnimation from "../assets/bookOpening.json";
+import libraryAnimation from "../assets/library.json";
 
 import book from "../assets/book.png";
 import books from "../assets/books.png";
 
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, getDoc, setDoc, increment } from "firebase/firestore";
+import { async } from "@firebase/util";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA-kAa27PF2pr8rL8zVbkGbNVwutxGSPyY",
+  authDomain: "openai-ruralad.firebaseapp.com",
+  projectId: "openai-ruralad",
+  storageBucket: "openai-ruralad.appspot.com",
+  messagingSenderId: "870147816704",
+  appId: "1:870147816704:web:492dbe6233a82a892c07e5",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore();
+
 export default function Home(props) {
   const { info, setInfo } = props;
   const [previousStories, setPreviousStories] = useState(false);
+  const [totalViews, setTotalViews] = useState(0);
 
   const navigate = useNavigate();
-  const switchPreviousStories = () => {
-    setPreviousStories(true);
-    setTimeout(() => {
-      setPreviousStories(false);
-    }, 2000);
-  };
-  useEffect(()=>{
+  useEffect(async () => {
     lottie.loadAnimation({
-      container : document.querySelector("#animation"),
-      animationData : bookAnimation,
-    })
+      container: document.querySelector("#animation"),
+      animationData: bookAnimation,
+    });
     lottie.loadAnimation({
-      container : document.querySelector("#animation2"),
-      animationData : libraryAnimation,
-    })
-  },[])
+      container: document.querySelector("#animation2"),
+      animationData: libraryAnimation,
+    });
+    const docRef = doc(db, "stats", "all");
+    const docSnap = await getDoc(docRef);
+
+    setTotalViews(docSnap.data().totalPageViews);
+
+    await setDoc(doc(db, "stats", "all"), {
+      totalPageViews : increment(1)
+    },{merge:true});
+
+  }, []);
   return (
     <>
       <div className="boxes">
         <div className="box" onClick={() => navigate("/today")}>
-        <div id="animation" className="animationStyle"></div>
+          <div id="animation" className="animationStyle"></div>
           <p>today's story</p>
         </div>
-        <div className="box" onClick={switchPreviousStories}>
+        <div className="box" onClick={()=>navigate("/all")}>
           {/* <img src={books} alt="allStories" /> */}
           <div id="animation2" className="animationStyle"></div>
           <p>previous stories</p>
@@ -48,6 +68,7 @@ export default function Home(props) {
           <p>still working on it</p>
         </div>
       )}
+      {totalViews && <div className="totalViews">page views:{totalViews}</div>}
     </>
   );
 }
@@ -74,9 +95,9 @@ function InfoCard(props) {
       </p>
       <h2>how does it work</h2>
       <p>
-        in a nutshell, new stories are made every midnight in a nodejs
-        server using openai api, and the results are stored in firebase
-        database. code is{" "}
+        in a nutshell, new stories are made every midnight in a nodejs server
+        using openai api, and the results are stored in firebase database. code
+        is{" "}
         <a
           href="https://github.com/ruralad/openai-story-project"
           target="__blank"

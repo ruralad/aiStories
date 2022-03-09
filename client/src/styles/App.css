@@ -108,6 +108,13 @@ a{
   margin: 0;
   padding: 0;
 }
+.totalViews{
+  font-size: .6rem;
+  position: absolute;
+  bottom: 3%;
+  left: 3%;
+  opacity: .8;
+}
 @media (max-width:641px){
   .infoCard{
     width: 80%;
