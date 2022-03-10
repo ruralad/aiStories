@@ -114,6 +114,15 @@ a{
   bottom: 3%;
   left: 3%;
   opacity: .8;
+  animation: showSlowly .8s ease-out;
+}
+@keyframes showSlowly {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
 }
 @media (max-width:641px){
   .infoCard{

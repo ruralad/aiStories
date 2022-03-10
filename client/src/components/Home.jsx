@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {db} from "../components/firebaseConfig"
+
 import lottie from "lottie-web/build/player/lottie_light";
 import bookAnimation from "../assets/bookOpening.json";
 import libraryAnimation from "../assets/library.json";
@@ -7,25 +9,11 @@ import libraryAnimation from "../assets/library.json";
 import book from "../assets/book.png";
 import books from "../assets/books.png";
 
-import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc, increment } from "firebase/firestore";
-import { async } from "@firebase/util";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyA-kAa27PF2pr8rL8zVbkGbNVwutxGSPyY",
-  authDomain: "openai-ruralad.firebaseapp.com",
-  projectId: "openai-ruralad",
-  storageBucket: "openai-ruralad.appspot.com",
-  messagingSenderId: "870147816704",
-  appId: "1:870147816704:web:492dbe6233a82a892c07e5",
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore();
 
 export default function Home(props) {
   const { info, setInfo } = props;
-  const [previousStories, setPreviousStories] = useState(false);
   const [totalViews, setTotalViews] = useState(0);
 
   const navigate = useNavigate();
@@ -63,12 +51,7 @@ export default function Home(props) {
       </div>
 
       {info && <InfoCard setInfo={setInfo} />}
-      {previousStories && (
-        <div className="snackbar">
-          <p>still working on it</p>
-        </div>
-      )}
-      {totalViews && <div className="totalViews">page views:{totalViews}</div>}
+      {(totalViews > 0) && <div className="totalViews">page views:{totalViews}</div>}
     </>
   );
 }

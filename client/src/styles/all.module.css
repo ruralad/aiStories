@@ -2,3 +2,14 @@
     margin-top: 20px;
     font-style: italic;
 }
+.stories{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.each::before{
+    content: "• ";
+}
+.each{
+    padding: 5px;
+}
