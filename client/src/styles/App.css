@@ -3,6 +3,8 @@
   background-color: var(--background);
   width: 100%;
   height: 100vh;
+  min-height: fill-available;
+  min-height: -webkit-fill-available;
   transition: all 0.5s;
   display: flex;
   justify-content: center;

@@ -27,7 +27,6 @@ app.get("/", (req, res) => {
   res.send("hi");
 });
 app.post("/create-new-story", async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5501");
   const response = await openai.createCompletion("text-davinci-001", {
     prompt: "tell me a story that's happy and not too cliche",
     temperature: 0.7,

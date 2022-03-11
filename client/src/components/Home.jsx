@@ -31,9 +31,9 @@ export default function Home(props) {
 
     setTotalViews(docSnap.data().totalPageViews);
 
-    await setDoc(doc(db, "stats", "all"), {
-      totalPageViews : increment(1)
-    },{merge:true});
+    // await setDoc(doc(db, "stats", "all"), {
+    //   totalPageViews : increment(1)
+    // },{merge:true});
 
   }, []);
   return (
@@ -51,7 +51,7 @@ export default function Home(props) {
       </div>
 
       {info && <InfoCard setInfo={setInfo} />}
-      {(totalViews > 0) && <div className="totalViews">page views:{totalViews}</div>}
+      {(totalViews > 0 && info) && <div className="totalViews">page views:{totalViews}</div>}
     </>
   );
 }
