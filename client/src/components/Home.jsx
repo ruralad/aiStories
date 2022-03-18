@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {db} from "../components/firebaseConfig"
+import { db } from "../components/firebaseConfig";
 
 import lottie from "lottie-web/build/player/lottie_light";
 import bookAnimation from "../assets/bookOpening.json";
@@ -9,12 +9,20 @@ import libraryAnimation from "../assets/library.json";
 import book from "../assets/book.png";
 import books from "../assets/books.png";
 
-import { getFirestore, doc, getDoc, setDoc, increment } from "firebase/firestore";
-
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  increment,
+} from "firebase/firestore";
 
 export default function Home(props) {
   const { info, setInfo } = props;
-  const [totalViews, setTotalViews] = useState(0);
+  const [stats, setStats] = useState({
+    totalViews: 0,
+    totalStories: 0,
+  });
 
   const navigate = useNavigate();
   useEffect(async () => {
@@ -29,12 +37,11 @@ export default function Home(props) {
     const docRef = doc(db, "stats", "all");
     const docSnap = await getDoc(docRef);
 
-    setTotalViews(docSnap.data().totalPageViews);
+    setStats(docSnap.data());
 
-    // await setDoc(doc(db, "stats", "all"), {
-    //   totalPageViews : increment(1)
-    // },{merge:true});
-
+    await setDoc(doc(db, "stats", "all"), {
+      totalPageViews : increment(1)
+    },{merge:true});
   }, []);
   return (
     <>
@@ -43,7 +50,7 @@ export default function Home(props) {
           <div id="animation" className="animationStyle"></div>
           <p>today's story</p>
         </div>
-        <div className="box" onClick={()=>navigate("/all")}>
+        <div className="box" onClick={() => navigate("/all")}>
           {/* <img src={books} alt="allStories" /> */}
           <div id="animation2" className="animationStyle"></div>
           <p>previous stories</p>
@@ -51,7 +58,14 @@ export default function Home(props) {
       </div>
 
       {info && <InfoCard setInfo={setInfo} />}
-      {(totalViews > 0 && info) && <div className="totalViews">page views:{totalViews}</div>}
+      {stats && info && (
+        <>
+          <div className="totalViews">page views:{stats.totalPageViews}</div>
+          <div className="totalStories">
+            total stories written:{stats.numberOfStories}
+          </div>
+        </>
+      )}
     </>
   );
 }

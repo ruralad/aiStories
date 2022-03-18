@@ -1,6 +1,5 @@
 .app {
   color: var(--text-primary);
-  background-color: var(--background);
   width: 100%;
   min-height: 100vh;
   transition: all 0.5s;
@@ -9,10 +8,12 @@
   justify-content: center;
   flex-direction: column;
   -webkit-tap-highlight-color: transparent;
+  background-color: var(--background);
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='var(--text-primary)' fill-opacity='0.10' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+
 }
 .storyContainer{
   text-align: left;
-  padding: 20% 10% 10% 10%;
 }
 
 .story {
