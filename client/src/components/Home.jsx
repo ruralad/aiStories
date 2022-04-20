@@ -25,23 +25,30 @@ export default function Home(props) {
   });
 
   const navigate = useNavigate();
-  useEffect(async () => {
-    lottie.loadAnimation({
-      container: document.querySelector("#animation"),
-      animationData: bookAnimation,
-    });
-    lottie.loadAnimation({
-      container: document.querySelector("#animation2"),
-      animationData: libraryAnimation,
-    });
-    const docRef = doc(db, "stats", "all");
-    const docSnap = await getDoc(docRef);
+  useEffect(() => {
+    async function fetchData() {
+      lottie.loadAnimation({
+        container: document.querySelector("#animation"),
+        animationData: bookAnimation,
+      });
+      lottie.loadAnimation({
+        container: document.querySelector("#animation2"),
+        animationData: libraryAnimation,
+      });
+      const docRef = doc(db, "stats", "all");
+      const docSnap = await getDoc(docRef);
 
-    setStats(docSnap.data());
+      setStats(docSnap.data());
 
-    await setDoc(doc(db, "stats", "all"), {
-      totalPageViews : increment(1)
-    },{merge:true});
+      await setDoc(
+        doc(db, "stats", "all"),
+        {
+          totalPageViews: increment(1),
+        },
+        { merge: true }
+      );
+    }
+    fetchData();
   }, []);
   return (
     <>

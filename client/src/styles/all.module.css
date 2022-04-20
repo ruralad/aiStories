@@ -1,20 +1,21 @@
-.working{
-    margin-top: 20px;
-    font-style: italic;
+.goback {
+  opacity: 0.3;
+  margin-top: 20px;
+  font-style: italic;
 }
-.stories{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    overflow-y: scroll;
+.stories {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  overflow-y: scroll;
 }
-::-webkit-scrollbar{
-    display: none;
+::-webkit-scrollbar {
+  display: none;
 }
-.each::before{
-    content: "• ";
+.each::before {
+  content: "• ";
 }
-.each{
-    padding: 5px;
+.each {
+  padding: 5px;
 }
