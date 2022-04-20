@@ -20,9 +20,11 @@
 
 .story {
   max-width: 400px;
+  font-weight: 200;
 }
 
 .goBack{
+  opacity: .3;
   text-decoration: underline;
   cursor: pointer;
   font-style: italic;

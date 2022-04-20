@@ -15,27 +15,34 @@ export default function All() {
     defaultDark ? "dark" : "light"
   );
 
-  useEffect(async () => {
-    const ref = doc(db, "stats", "all");
-    const docSnap = await getDoc(ref);
-    setAll(docSnap.data().numberOfStories);
+  useEffect(() => {
+    async function fetchData() {
+      const ref = doc(db, "stats", "all");
+      const docSnap = await getDoc(ref);
+      setAll(docSnap.data().numberOfStories);
+    }
+    fetchData();
   }, []);
   return (
     <div className="app" data-theme={theme}>
       <TopBar theme={theme} setInfo={false} setTheme={setTheme} />
       <div className={styles.stories}>
-      {all &&
-        [...Array(all)].map((x, i) => (
-          <Link key={i} className={styles.each}
-            to={{
-              pathname: "/all/" + (all-i),
-              state: { theme },
-            }}
-          >Story {all-i}</Link>
-        ))}
+        {all &&
+          [...Array(all)].map((x, i) => (
+            <Link
+              key={i}
+              className={styles.each}
+              to={{
+                pathname: "/all/" + (all - i),
+                state: { theme },
+              }}
+            >
+              Story {all - i}
+            </Link>
+          ))}
       </div>
-      
-      <Link to="/" className={styles.working}>
+
+      <Link to="/" className={styles.goback}>
         go back home
       </Link>
     </div>

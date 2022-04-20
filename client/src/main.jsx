@@ -1,12 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './styles/index.css'
-import Entry from './Entry'
-import {BrowserRouter} from "react-router-dom"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./styles/index.css";
+import Entry from "./Entry";
+import { BrowserRouter } from "react-router-dom";
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Entry />
   </BrowserRouter>,
-  document.getElementById('root')
-)
+);
