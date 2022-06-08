@@ -100,16 +100,16 @@ function InfoCard(props) {
       <h2>how does it work</h2>
       <p>
         in a nutshell, new stories are made every midnight in a nodejs server
-        using openai api, and the results are stored in firebase database. code
-        is{" "}
+        using openai api, and the results are stored in firebase database. 
         <a
           href="https://github.com/ruralad/openai-story-project"
           target="__blank"
         >
-          open source
+          code
         </a>{" "}
-        btw.
+        
       </p>
+      <p>my openai free account expires on June 1, 2022. which means no more new stories after that.</p>
     </div>
   );
 }

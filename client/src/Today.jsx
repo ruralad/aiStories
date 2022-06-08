@@ -7,6 +7,7 @@ import styles from "./styles/today.module.css"
 
 export default function Today() {
   const [info, setInfo] = useState(false);
+  document.title = "today's story | aiStories";
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
     "theme",

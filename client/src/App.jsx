@@ -7,6 +7,7 @@ import TopBar from "./components/Topbar";
 
 export default function App() {
   const [info, setInfo] = useState(false);
+  document.title = "aiStories | stories written by gpt-3";
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
     "theme",

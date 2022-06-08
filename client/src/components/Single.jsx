@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 
 export default function Single(props) {
   const { id } = useParams();
+  document.title = "Story " + id + " | aiStories";
   const [info, setInfo] = useState(false);
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
@@ -38,31 +39,38 @@ export default function Single(props) {
     navigate("/");
   };
 
-  useEffect(async () => {
-    lottie.loadAnimation({
-      container: document.querySelector("#loadLight"),
-      animationData: loadingAnimation,
-    });
-    lottie.loadAnimation({
-      container: document.querySelector("#loadDark"),
-      animationData: loadingAnimationLight,
-    });
-    const ref = collection(db, "stories");
-    const q = query(
-      collection(db, "stories"),
-      where("number", "==", Number(id))
-    );
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      setStory({text : doc.data().story,number: doc.data().number ,loading:false})
-    });
+  useEffect(() => {
+    async function fetchData() {
+      lottie.loadAnimation({
+        container: document.querySelector("#loadLight"),
+        animationData: loadingAnimation,
+      });
+      lottie.loadAnimation({
+        container: document.querySelector("#loadDark"),
+        animationData: loadingAnimationLight,
+      });
+      const ref = collection(db, "stories");
+      const q = query(
+        collection(db, "stories"),
+        where("number", "==", Number(id))
+      );
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setStory({
+          text: doc.data().story,
+          number: doc.data().number,
+          loading: false,
+        });
+      });
+    }
+    fetchData();
   }, []);
   return (
     <div className={styles.app} data-theme={theme}>
       {!info && <TopBar theme={theme} setInfo={false} setTheme={setTheme} />}
       <div className={styles.storyContainer}>
-      {story.loading && theme === "dark" && (
-        <div id="loadLight" className={styles.loadAnimation}></div>
+        {story.loading && theme === "dark" && (
+          <div id="loadLight" className={styles.loadAnimation}></div>
         )}
         {story.loading && theme === "light" && (
           <div id="loadDark" className={styles.loadAnimation}></div>
